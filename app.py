@@ -103,6 +103,21 @@ s1.metric("Diversification Score", f"{div:.0f}/100")
 s2.metric("Liquidity Score", f"{liq:.0f}/100")
 s3.metric("Resilience Score", f"{res:.0f}/100", help=f"Worst scenario drop: {worst_drop:.1f}%")
 
+# ---------- Health Summary ----------
+issues = []
+if div < 40:
+    issues.append("high concentration risk")
+if liq < 20:
+    issues.append("low short-term liquidity buffer")
+if res < 50:
+    issues.append("fragile under stress scenarios")
+
+st.subheader("Health Summary")
+if not issues:
+    st.success("Overall: healthy profile across diversification, liquidity, and stress resilience.")
+else:
+    st.warning("Overall: " + ", ".join(issues) + ".")
+
 # ---------- Alerts + Recommendations ----------
 a1, a2 = st.columns([1.0, 1.2])
 
