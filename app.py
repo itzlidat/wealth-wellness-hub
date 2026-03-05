@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 
+from src.ingest import load_portfolio
 from src.scoring import diversification_score, liquidity_score, resilience_score_from_worst_drop
 from src.scenarios import SCENARIOS, apply_scenario
 from src.recommend import generate_alerts, generate_recommendations
@@ -19,10 +20,14 @@ sample = st.sidebar.selectbox(
 )
 
 df_base = None
-if uploaded:
-    df_base = pd.read_csv(uploaded)
-elif sample != "(none)":
-    df_base = pd.read_csv(f"data/samples/{sample}.csv")
+try:
+    if uploaded:
+        df_base = load_portfolio(uploaded)
+    elif sample != "(none)":
+        df_base = load_portfolio(f"data/samples/{sample}.csv")
+except ValueError as e:
+    st.error(str(e))
+    st.stop()
 
 if df_base is None:
     st.info("Upload a CSV or load a sample to begin.")
