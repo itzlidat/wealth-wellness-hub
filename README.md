@@ -37,6 +37,12 @@ A single “Wealth Wallet” dashboard that aggregates fragmented assets (cash, 
 6. Highlight **low liquidity** + recommendation to build cash buffer
 
 ## How to run
+
 ```bash
+# (Recommended) create and activate a virtual environment
+python3 -m venv .venv
+source .venv/bin/activate   # Windows: .venv\Scripts\activate
+
 pip install -r requirements.txt
 streamlit run app.py
+# then open: http://localhost:8501
