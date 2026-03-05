@@ -37,8 +37,11 @@ if scenario_name != "(none)":
     df = apply_scenario(df, scenario_name)
 
 # ---------- Core Metrics ----------
+base_total = float(df_base["value_sgd"].sum())
 total = float(df["value_sgd"].sum())
-st.metric("Net Worth (SGD)", f"{total:,.0f}")
+delta = total - base_total
+
+st.metric("Net Worth (SGD)", f"{total:,.0f}", delta=f"{delta:+,.0f}" if scenario_name != "(none)" else None)
 
 # Allocation + preview
 c1, c2 = st.columns([1.2, 1.0])
@@ -51,6 +54,24 @@ with c1:
 with c2:
     st.subheader("Preview")
     st.dataframe(df, use_container_width=True, height=260)
+
+# ---------- Scenario impact: Top drivers ----------
+if scenario_name != "(none)":
+    df_after = apply_scenario(df_base, scenario_name)
+
+    impact = df_base[["asset_name", "asset_class", "value_sgd"]].copy()
+    impact = impact.rename(columns={"value_sgd": "before_sgd"})
+    impact["after_sgd"] = df_after["value_sgd"].values
+    impact["change_sgd"] = impact["after_sgd"] - impact["before_sgd"]  # negative = loss
+
+    top_losses = impact.sort_values("change_sgd").head(3)
+
+    st.subheader("Scenario Impact (Top Drivers)")
+    st.caption(f"Applied: {scenario_name}")
+
+    for _, r in top_losses.iterrows():
+        loss = -r["change_sgd"]
+        st.write(f"- **{r['asset_name']}** ({r['asset_class']}): **-{loss:,.0f} SGD**")
 
 # ---------- Scores ----------
 div = diversification_score(df)
