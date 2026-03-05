@@ -1,0 +1,7 @@
+asset_name,asset_class,value_sgd,liquidity_days,risk_tag,source
+DBS Savings,Cash,3000,0,Low,Bank
+S&P500 ETF,Equity,5000,2,Med,Broker
+Tech Stocks,Equity,2000,2,High,Broker
+Bitcoin,Crypto,18000,1,High,Crypto
+Ethereum,Crypto,12000,1,High,Crypto
+Rolex (Resale),Private,4000,30,Med,Manual
