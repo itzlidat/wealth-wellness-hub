@@ -12,7 +12,11 @@ st.caption("Demo/Education only — not financial advice.")
 # ---------- Sidebar: Import ----------
 st.sidebar.header("Import Portfolio")
 uploaded = st.sidebar.file_uploader("Upload CSV", type=["csv"])
-sample = st.sidebar.selectbox("Or load a sample", ["(none)", "crypto_heavy", "balanced", "property_heavy"])
+sample = st.sidebar.selectbox(
+    "Or load a sample",
+    ["(none)", "crypto_heavy", "balanced", "property_heavy"],
+    index=1
+)
 
 df_base = None
 if uploaded:
@@ -62,16 +66,23 @@ if scenario_name != "(none)":
     impact = df_base[["asset_name", "asset_class", "value_sgd"]].copy()
     impact = impact.rename(columns={"value_sgd": "before_sgd"})
     impact["after_sgd"] = df_after["value_sgd"].values
-    impact["change_sgd"] = impact["after_sgd"] - impact["before_sgd"]  # negative = loss
+    impact["change_sgd"] = impact["after_sgd"] - impact["before_sgd"]
 
-    top_losses = impact.sort_values("change_sgd").head(3)
+    # Keep only meaningful changes (removes -0 SGD noise)
+    impact = impact[impact["change_sgd"].abs() >= 1].copy()
 
     st.subheader("Scenario Impact (Top Drivers)")
     st.caption(f"Applied: {scenario_name}")
 
-    for _, r in top_losses.iterrows():
-        loss = -r["change_sgd"]
-        st.write(f"- **{r['asset_name']}** ({r['asset_class']}): **-{loss:,.0f} SGD**")
+    if impact.empty:
+        st.info("No assets impacted by this scenario.")
+    else:
+        top_losses = impact.sort_values("change_sgd").head(3)
+        for _, r in top_losses.iterrows():
+            st.write(f"- **{r['asset_name']}** ({r['asset_class']}): **{r['change_sgd']:+,.0f} SGD**")
+
+if scenario_name != "(none)":
+    st.caption("Scores shown are after applying the selected scenario.")
 
 # ---------- Scores ----------
 div = diversification_score(df)
