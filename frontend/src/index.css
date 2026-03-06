@@ -6,10 +6,20 @@
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background: #111318;
+  background: #07080e;
+  background-image:
+    radial-gradient(ellipse 80% 60% at 15% 10%, rgba(110, 50, 220, 0.16) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 85% 20%, rgba(200, 40, 100, 0.12) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 60% at 50% 90%, rgba(30, 80, 200, 0.11) 0%, transparent 60%);
   color: #e2e4ea;
   font-size: 14px;
 }
+
+/* ---- Scrollbar ---- */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.10); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.18); }
 
 /* ---- Layout ---- */
 .app {
@@ -20,8 +30,10 @@ body {
 .sidebar {
   width: 260px;
   min-width: 260px;
-  background: #16191f;
-  border-right: 1px solid #23262f;
+  background: rgba(12, 14, 22, 0.35);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border-right: 1px solid rgba(255, 255, 255, 0.10);
   padding: 24px 16px;
   display: flex;
   flex-direction: column;
@@ -66,34 +78,65 @@ body {
 .sidebar input[type="file"] {
   width: 100%;
   padding: 7px 10px;
-  border: 1px solid #2a2d38;
+  border: 1px solid rgba(255, 255, 255, 0.10);
   border-radius: 6px;
   font-size: 13px;
-  background: #1e2130;
+  background: rgba(255, 255, 255, 0.06);
   color: #e2e4ea;
   outline: none;
+}
+
+/* Custom dropdown arrow — tiny chevron */
+.sidebar select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%238b92a5' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 28px;
 }
 
 .sidebar select:focus {
   border-color: #c44569;
 }
 
+/* Themed file input button */
+.sidebar input[type="file"]::file-selector-button {
+  background: rgba(196, 69, 105, 0.12);
+  border: 1px solid rgba(196, 69, 105, 0.35);
+  border-radius: 4px;
+  color: #c44569;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  margin-right: 8px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.sidebar input[type="file"]::file-selector-button:hover {
+  background: rgba(196, 69, 105, 0.25);
+  color: #e06080;
+}
+
 .btn-reset {
   width: 100%;
   margin-top: 10px;
   padding: 8px;
-  border: 1px solid #2a2d38;
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 6px;
   font-size: 13px;
-  background: #1e2130;
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   cursor: pointer;
-  color: #8b92a5;
-  transition: background 0.15s, border-color 0.15s;
+  color: #ffffff;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
 }
 
 .btn-reset:hover {
-  background: #252836;
-  border-color: #c44569;
+  background: rgba(255, 255, 255, 0.13);
+  border-color: rgba(196, 69, 105, 0.6);
   color: #e2e4ea;
 }
 
@@ -120,11 +163,13 @@ body {
 
 /* ---- Card ---- */
 .card {
-  background: #1a1d26;
+  background: rgba(20, 22, 32, 0.25);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
   border-radius: 12px;
   padding: 20px 24px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
-  border: 1px solid #23262f;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255,255,255,0.08);
+  border: 1px solid rgba(255, 255, 255, 0.10);
 }
 
 .card h2 {
@@ -157,11 +202,13 @@ body {
 
 .metric-card {
   flex: 1;
-  background: #1a1d26;
+  background: rgba(20, 22, 32, 0.25);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
   border-radius: 12px;
   padding: 18px 22px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
-  border: 1px solid #23262f;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255,255,255,0.08);
+  border: 1px solid rgba(255, 255, 255, 0.10);
 }
 
 .metric-card .m-label {
@@ -198,11 +245,13 @@ body {
 
 .score-card {
   flex: 1;
-  background: #1a1d26;
+  background: rgba(20, 22, 32, 0.25);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
   border-radius: 12px;
   padding: 18px 22px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
-  border: 1px solid #23262f;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255,255,255,0.08);
+  border: 1px solid rgba(255, 255, 255, 0.10);
 }
 
 .score-card .s-label {
@@ -350,11 +399,13 @@ tr:hover td { background: #1e2130; }
 
 /* ---- Health summary ---- */
 .health-card {
-  background: #1a1d26;
+  background: rgba(20, 22, 32, 0.25);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
   border-radius: 12px;
   padding: 18px 24px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
-  border: 1px solid #23262f;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255,255,255,0.08);
+  border: 1px solid rgba(255, 255, 255, 0.10);
   margin-bottom: 20px;
 }
 
@@ -494,24 +545,30 @@ tr:hover td { background: #1e2130; }
 .scenario-btns .btn-reset,
 .scenario-btns .btn-apply {
   flex: 1;
+  width: auto;
+  margin-top: 0;
+  padding: 8px;
 }
 
 .btn-apply {
   flex: 1;
   padding: 8px;
-  border: 1px solid #c44569;
+  border: 1px solid rgba(196, 69, 105, 0.55);
   border-radius: 6px;
   font-size: 13px;
-  background: transparent;
+  background: rgba(196, 69, 105, 0.12);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   cursor: pointer;
-  color: #c44569;
+  color: #e06080;
   font-weight: 600;
-  transition: background 0.15s;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
 }
 
 .btn-apply:hover,
 .btn-apply.active {
-  background: #c44569;
+  background: rgba(196, 69, 105, 0.60);
+  border-color: rgba(196, 69, 105, 0.95);
   color: #fff;
 }
 

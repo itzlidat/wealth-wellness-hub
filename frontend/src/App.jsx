@@ -156,13 +156,13 @@ export default function App() {
           </label>
           <input
             type="range"
-            min="-90" max="50" step="1"
+            min="-100" max="100" step="1"
             value={scenarioPct}
             onChange={e => setScenarioPct(Number(e.target.value))}
             className="scenario-slider"
           />
           <div className="slider-labels">
-            <span>-90%</span><span>0%</span><span>+50%</span>
+            <span>-100%</span><span>0%</span><span>+100%</span>
           </div>
 
           <div className="scenario-btns">
