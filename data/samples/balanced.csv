@@ -1,7 +1,0 @@
-asset_name,asset_class,value_sgd,liquidity_days,risk_tag,source
-OCBC Savings,Cash,12000,0,Low,Bank
-Global Equity ETF,Equity,18000,2,Med,Broker
-Singapore Equity,Equity,6000,2,Med,Broker
-Gov Bond Fund,Bonds,9000,7,Low,Broker
-Crypto Basket,Crypto,3000,1,High,Crypto
-CPF OA-like (Mock),Private,5000,180,Low,Manual
