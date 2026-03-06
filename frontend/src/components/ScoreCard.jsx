@@ -1,5 +1,5 @@
 function scoreColor(score) {
-  if (score >= 70) return '#27ae60'
+  if (score >= 70) return '#2ecc71'
   if (score >= 40) return '#f39c12'
   return '#e74c3c'
 }

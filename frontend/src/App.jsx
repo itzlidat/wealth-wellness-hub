@@ -150,7 +150,7 @@ export default function App() {
           </select>
 
           <label>
-            Change: <strong style={{ color: scenarioPct < 0 ? '#e74c3c' : '#27ae60' }}>
+            Change: <strong style={{ color: scenarioPct < 0 ? '#e74c3c' : '#2ecc71' }}>
               {scenarioPct > 0 ? '+' : ''}{scenarioPct}%
             </strong>
           </label>
@@ -223,7 +223,7 @@ export default function App() {
                 <AllocationChart data={result.allocation} />
               </div>
               <div className="card">
-                <h2>Portfolio Holdings <span style={{ fontSize: 11, color: '#aaa', fontWeight: 400, textTransform: 'none' }}>· click a row to view chart</span></h2>
+                <h2>Portfolio Holdings <span style={{ fontSize: 11, color: '#555b6e', fontWeight: 400, textTransform: 'none' }}>· click a row to view chart</span></h2>
                 <PortfolioTable assets={result.assets} fmtSgd={fmtSgd} onSelectAsset={setSelectedAsset} />
               </div>
             </div>

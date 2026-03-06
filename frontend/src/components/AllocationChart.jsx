@@ -2,7 +2,7 @@ import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell
 } from 'recharts'
 
-const COLORS = ['#0052cc', '#00b8d9', '#36b37e', '#ff5630', '#6554c0', '#ff991f']
+const COLORS = ['#c44569', '#5b8dee', '#2ecc71', '#f39c12', '#9b59b6', '#e67e22']
 
 const fmtY = (v) => {
   if (v >= 1000000) return `S$${(v / 1000000).toFixed(1)}M`
@@ -15,12 +15,12 @@ const CustomTooltip = ({ active, payload }) => {
   const { assetClass, valueSgd, weight } = payload[0].payload
   return (
     <div style={{
-      background: '#fff', border: '1px solid #e0e4ea',
-      borderRadius: 8, padding: '10px 14px', fontSize: 13
+      background: '#1a1d26', border: '1px solid #23262f',
+      borderRadius: 8, padding: '10px 14px', fontSize: 13, color: '#e2e4ea'
     }}>
       <strong>{assetClass}</strong>
       <div>S$ {valueSgd.toLocaleString('en-SG', { maximumFractionDigits: 0 })}</div>
-      <div style={{ color: '#aaa' }}>{(weight * 100).toFixed(1)}% of portfolio</div>
+      <div style={{ color: '#555b6e' }}>{(weight * 100).toFixed(1)}% of portfolio</div>
     </div>
   )
 }
@@ -29,9 +29,9 @@ export default function AllocationChart({ data }) {
   return (
     <ResponsiveContainer width="100%" height={210}>
       <BarChart data={data} margin={{ top: 4, right: 8, bottom: 4, left: 8 }}>
-        <XAxis dataKey="assetClass" tick={{ fontSize: 12 }} axisLine={false} tickLine={false} />
-        <YAxis tick={{ fontSize: 11 }} tickFormatter={fmtY} axisLine={false} tickLine={false} width={60} />
-        <Tooltip content={<CustomTooltip />} cursor={{ fill: '#f3f4f6' }} />
+        <XAxis dataKey="assetClass" tick={{ fontSize: 12, fill: '#8b92a5' }} axisLine={false} tickLine={false} />
+        <YAxis tick={{ fontSize: 11, fill: '#8b92a5' }} tickFormatter={fmtY} axisLine={false} tickLine={false} width={60} />
+        <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(255,255,255,0.04)' }} />
         <Bar dataKey="valueSgd" radius={[5, 5, 0, 0]} maxBarSize={60}>
           {data.map((_, i) => (
             <Cell key={i} fill={COLORS[i % COLORS.length]} />

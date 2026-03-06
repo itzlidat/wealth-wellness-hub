@@ -93,7 +93,7 @@ export default function AssetModal({ asset, onClose }) {
 
             {loading && (
               <div style={{ height: 320, display: 'flex', alignItems: 'center',
-                justifyContent: 'center', color: '#aaa' }}>
+                justifyContent: 'center', color: '#555b6e' }}>
                 <div className="spinner" style={{ marginRight: 10 }} /> Loading chart...
               </div>
             )}
@@ -103,7 +103,7 @@ export default function AssetModal({ asset, onClose }) {
             )}
           </>
         ) : (
-          <div style={{ padding: '24px 0', color: '#aaa', fontSize: 13, textAlign: 'center' }}>
+          <div style={{ padding: '24px 0', color: '#555b6e', fontSize: 13, textAlign: 'center' }}>
             No market ticker — candlestick chart unavailable for manually-valued assets.
           </div>
         )}
