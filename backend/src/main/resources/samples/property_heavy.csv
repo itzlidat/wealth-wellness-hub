@@ -1,0 +1,7 @@
+asset_name,asset_class,value_sgd,liquidity_days,risk_tag,source,ticker,quantity
+UOB Savings,Cash,4000,0,Low,Bank,,
+STI ETF,Equity,6000,2,Med,Broker,ES3.SI,600
+Bond Fund,Bonds,4000,7,Low,Broker,AGG,40
+HDB Flat (Estimated),Private,420000,180,Med,Manual,,
+Car (Estimated),Private,25000,30,Med,Manual,,
+Bitcoin,Crypto,3000,1,High,Crypto,BTC,0.04
