@@ -388,6 +388,24 @@ export default function App() {
     URL.revokeObjectURL(url)
   }
 
+  // ---- Scroll-reveal: observe .scroll-reveal elements after result loads ----
+  useEffect(() => {
+    if (!result) return
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('revealed')
+        } else {
+          e.target.classList.remove('revealed')
+        }
+      }),
+      { threshold: 0.08 }
+    )
+    const els = document.querySelectorAll('.scroll-reveal')
+    els.forEach(el => observer.observe(el))
+    return () => observer.disconnect()
+  }, [result])
+
   // ---- Refresh live prices ----
   const handleRefresh = async () => {
     if (!assets) return
@@ -579,14 +597,14 @@ export default function App() {
 
         {result && !loading && (
           <>
-            <WealthSummary result={result} fmtSgd={fmtSgd} scenarioActive={scenarioActive} />
+            <div className="scroll-reveal"><WealthSummary result={result} fmtSgd={fmtSgd} scenarioActive={scenarioActive} /></div>
 
-            <div className="card mb-20">
+            <div className="card mb-20 scroll-reveal">
               <h2>Net Worth History</h2>
               <NetWorthChart history={netWorthHistory} />
             </div>
 
-            <div className="row mb-20">
+            <div className="row mb-20 scroll-reveal">
               <div className="card">
                 <h2>Allocation by Asset Class</h2>
                 <AllocationChart data={result.allocation} />
@@ -598,7 +616,7 @@ export default function App() {
             </div>
 
             {scenarioActive && result.scenarioImpact?.length > 0 && (
-              <div className="card mb-20">
+              <div className="card mb-20 scroll-reveal">
                 <h2>Scenario Impact — Top Drivers</h2>
                 <p style={{ fontSize: 12, color: '#aaa', marginBottom: 12 }}>
                   Applied: <strong>{scenarioLabel}</strong>
@@ -607,7 +625,7 @@ export default function App() {
               </div>
             )}
 
-            <div className="charts-scores-section">
+            <div className="charts-scores-section scroll-reveal">
               <FinancialCharts result={result} fmtSgd={fmtSgd} />
 
               <div className="scores-panel">
@@ -631,11 +649,11 @@ export default function App() {
               </div>
             </div>
 
-            <PlatformBreakdown breakdown={result.platformBreakdown} totalAssets={result.totalAssets} fmtSgd={fmtSgd} />
+            <div className="scroll-reveal"><PlatformBreakdown breakdown={result.platformBreakdown} totalAssets={result.totalAssets} fmtSgd={fmtSgd} /></div>
 
-            <HealthSummary issues={result.healthIssues} />
+            <div className="scroll-reveal"><HealthSummary issues={result.healthIssues} /></div>
 
-            <div className="row">
+            <div className="row scroll-reveal">
               <div className="card">
                 <h2>Alerts</h2>
                 <Alerts alerts={result.alerts} />
@@ -659,6 +677,39 @@ export default function App() {
         <BankConnectModal onClose={() => setShowBankConnect(false)} onImport={handleBankImport} />
       )}
     </div>
+
+    <footer className="ventura-footer">
+      <div className="ventura-footer-grid">
+        <div className="ventura-footer-col">
+          <h4>Company</h4>
+          <button className="ventura-footer-link">About Ventura</button>
+          <button className="ventura-footer-link">Our Mission</button>
+          <button className="ventura-footer-link">Security & Trust</button>
+          <button className="ventura-footer-link">Terms of Use</button>
+          <button className="ventura-footer-link">Privacy Policy</button>
+        </div>
+        <div className="ventura-footer-col">
+          <h4>Product</h4>
+          <button className="ventura-footer-link">How It Works</button>
+          <button className="ventura-footer-link">Watch Demo</button>
+          <button className="ventura-footer-link">Get on iOS</button>
+          <button className="ventura-footer-link">Get on Android</button>
+          <button className="ventura-footer-link">Refer a Friend</button>
+        </div>
+        <div className="ventura-footer-col">
+          <h4>Community</h4>
+          <button className="ventura-footer-link">Customer Stories</button>
+          <button className="ventura-footer-link">Ventura Blog</button>
+          <button className="ventura-footer-link">Help Center</button>
+          <button className="ventura-footer-link">X / Twitter</button>
+          <button className="ventura-footer-link">LinkedIn</button>
+        </div>
+      </div>
+      <div className="ventura-footer-bottom">
+        <span className="ventura-footer-brand">VENTURA</span>
+        <span className="ventura-footer-copy">© {new Date().getFullYear()} Ventura · Demo use only · Not financial advice</span>
+      </div>
+    </footer>
     </div>
   )
 }
