@@ -229,3 +229,6 @@ backend/target/
 # Env
 .env
 .env.local
+
+*.mv.db
+*.trace.db
