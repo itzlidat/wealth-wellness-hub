@@ -22,6 +22,7 @@ import Alerts from './components/Alerts'
 import Recommendations from './components/Recommendations'
 import PlatformBreakdown from './components/PlatformBreakdown'
 import ChatBot from './components/ChatBot'
+import MarketNews from './components/MarketNews'
 
 // ---- localStorage helpers ----
 const STORAGE_KEY = 'wwh_portfolios'
@@ -565,6 +566,7 @@ export default function App() {
             <div className="scenario-badge">Scenario: {scenarioLabel}</div>
           )}
         </section>
+
       </aside>
 
       {/* ---- Main ---- */}
@@ -654,13 +656,20 @@ export default function App() {
             <div className="scroll-reveal"><HealthSummary issues={result.healthIssues} /></div>
 
             <div className="row scroll-reveal">
-              <div className="card">
-                <h2>Alerts</h2>
-                <Alerts alerts={result.alerts} />
+              <div className="card card--split">
+                <div className="card-half card-half--large">
+                  <h2>Alerts</h2>
+                  <Alerts alerts={result.alerts} />
+                </div>
+                <div className="card-half-divider" />
+                <div className="card-half">
+                  <h2>Recommendations</h2>
+                  <Recommendations recs={result.recommendations} />
+                </div>
               </div>
-              <div className="card">
-                <h2>Recommendations</h2>
-                <Recommendations recs={result.recommendations} />
+              <div className="card card--news">
+                <h2>Market News</h2>
+                <MarketNews />
               </div>
             </div>
           </>

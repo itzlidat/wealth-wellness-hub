@@ -2091,6 +2091,93 @@ tr:hover td { background: #1e2130; }
   color: #e74c3c !important;
 }
 
+/* ---- Split card ---- */
+.card--split {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Market news card fills full row height */
+.card--news {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 24px 0;
+}
+
+.card--news .tradingview-widget-container {
+  flex: 1;
+  min-height: 0;
+}
+
+.card--news .tradingview-widget-container iframe {
+  height: 100% !important;
+}
+
+.news-refresh-bar {
+  padding: 10px 0 14px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.news-refresh-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #8b92a5;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: 5px 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.02em;
+}
+
+.news-refresh-btn:hover:not(:disabled) {
+  background: rgba(196, 69, 105, 0.12);
+  border-color: rgba(196, 69, 105, 0.4);
+  color: #e06080;
+}
+
+.news-refresh-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.news-refresh-icon {
+  font-size: 14px;
+  display: inline-block;
+}
+
+.news-refresh-icon.spinning {
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.card-half {
+  flex: 1;
+  padding: 20px 24px;
+}
+
+.card-half--large {
+  flex: 1;
+  min-height: 180px;
+}
+
+.card-half-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.07);
+  margin: 0;
+}
+
 /* ---- Scroll reveal ---- */
 .scroll-reveal {
   opacity: 0;
